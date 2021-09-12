@@ -10,7 +10,7 @@ import time
 import uuid
 import urllib.parse
 
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from email_validator import validate_email, EmailNotValidError
 from pandas import DataFrame, to_datetime
 from pytz import timezone
