@@ -116,6 +116,12 @@ class urls :
     def news(self, stock):
         return f'{self.base_securities_url}/information/news/v5/tickerNews/{stock}'
 
+    def option_orders(self, account_id, count, last_date):
+        if last_date:
+            return f'https://tradeapi.webulltrade.com/api/trade/v2/option/list?secAccountId={account_id}&pageSize={count}&dateType=ORDER&startTime={last_date}'
+        else:
+            return f'https://tradeapi.webulltrade.com/api/trade/v2/option/list?secAccountId={account_id}&pageSize={count}&dateType=ORDER'
+
     def option_quotes(self):
         return f'{self.base_options_gw_url}/quote/option/query/list'
 

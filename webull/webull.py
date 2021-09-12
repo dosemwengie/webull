@@ -320,6 +320,19 @@ class webull:
             output[item['key']] = item['value']
         return output
 
+    def get_option_orders(self,count=-1,days_ago=1, recent=False):
+        '''
+        output all option orders
+        ''' 
+        headers = self.build_req_headers(include_trade_token=True, include_time=True)
+        if recent:
+            last_date = date.today() - timedelta(days=days_ago)
+            last_date_format = last_date.strftime('%Y-%m-%d')
+            response = requests.get(self._urls.option_orders(self._account_id, count, last_date_format), headers=headers)
+        else:
+            response = requests.get(self._urls.option_orders(self._account_id, count, None), headers=headers)
+        return response.json()
+
     def get_activities(self, index=1, size=500) :
         '''
         Activities including transfers, trades and dividends
