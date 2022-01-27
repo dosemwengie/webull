@@ -55,6 +55,9 @@ class urls :
     def bars(self, stock):
         return f'{self.base_quote_url}/quote/tickerChartDatas/v5/{stock}'
 
+    def bars_crypto(self, stock):
+        return f'{self.base_fintech_gw_url}/crypto/charts/query?tickerIds={stock}'
+
     def cancel_order(self, account_id):
         return f'{self.base_ustrade_url}/trade/order/{account_id}/cancelStockOrder/'
 
@@ -113,8 +116,8 @@ class urls :
     def logout(self):
         return f'{self.base_userbroker_url}/passport/login/logout'
 
-    def news(self, stock):
-        return f'{self.base_securities_url}/information/news/v5/tickerNews/{stock}'
+    def news(self, stock, Id, items):
+        return f'{self.base_fintech_gw_url}/information/news/tickerNews?tickerId={stock}&currentNewsId={Id}&pageSize={items}'
 
     def option_orders(self, account_id, count, last_date):
         if last_date:
@@ -136,6 +139,9 @@ class urls :
 
     def orders(self, account_id, page_size):
         return f'{self.base_ustradebroker_url}/trade/v2/option/list?secAccountId={account_id}&startTime=1970-0-1&dateType=ORDER&pageSize={page_size}&status='
+
+    def history(self, account_id):
+        return f'{self.base_ustrade_url}/trading/v1/webull/order/list?secAccountId={account_id}'
 
     def paper_orders(self, paper_account_id, page_size):
         return f'{self.base_paper_url}/paper/1/acc/{paper_account_id}/order?&startTime=1970-0-1&dateType=ORDER&pageSize={page_size}&status='
@@ -162,7 +168,7 @@ class urls :
         return f'{self.base_ustrade_url}/trade/order/{account_id}/placeStockOrder'
 
     def modify_order(self, account_id, order_id):
-        return f'{self.base_trade_url}/trade/order/{account_id}/modifyStockOrder/{order_id}'
+        return f'{self.base_ustrade_url}/trading/v1/webull/order/stockOrderModify?secAccountId={account_id}'
 
     def quotes(self, stock):
         return f'{self.base_options_gw_url}/quotes/ticker/getTickerRealTime?tickerId={stock}&includeSecu=1&includeQuote=1'
